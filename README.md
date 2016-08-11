@@ -1,5 +1,7 @@
 # Demo Swift Realm
 
+<img src="README.png" alt="Realm" style="width: 100%;"/>
+
  * The [Swift](http://swift.org) programming language with
    [Apple](http://apple.com)
    [iOS](http://www.apple.com/ios/)
