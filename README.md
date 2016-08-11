@@ -132,6 +132,6 @@ We prefer to implement the Realm migration as its own class.
 * Package: demo_swift_realm
 * Version: 1.0.0
 * Created: 2016-04-09
-* Updated: 2016-04-28
-* License: GPL
+* Updated: 2016-08-11
+* License: BSD, MIT, GPL
 * Contact: Joel Parker Henderson (joel@joelparkerhenderson.com)
