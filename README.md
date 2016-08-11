@@ -1,6 +1,11 @@
 # Demo Swift Realm
 
-This is a demonstration of Apple iOS Xcode using the Swift language to create a project with the Realm.io database, and a couple of models.
+ * The [Swift](http://swift.org) programming language with
+   [Apple](http://apple.com)
+   [iOS](http://www.apple.com/ios/)
+   [Xcode](https://developer.apple.com/xcode/)
+
+ * The [Realm](http://realm.io) database, and a couple of models.
 
 This README describes how to create the project, if you want to try doing it yourself.
 
