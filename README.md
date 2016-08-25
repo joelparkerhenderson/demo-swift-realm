@@ -2,6 +2,8 @@
 
 <img src="README.png" alt="Realm" style="width: 100%;"/>
 
+This demonstration shows:
+
  * The [Swift](http://swift.org) programming language with
    [Apple](http://apple.com)
    [iOS](http://www.apple.com/ios/)
@@ -19,7 +21,6 @@ To learn more about Swift and Realm, see the official documentation for [Realm S
 
   * Need help? See our repo [demo_swift_hello_world](https://github.com/joelparkerhenderson/demo_swift_hello_world).
 
-
 1. Create a simple way to print some text to the screen, such as a text view with an IBOutlet named "demoTextView". 
 
   * Need help? See our repo [demo_swift_text_view](https://github.com/joelparkerhenderson/demo_swift_text_view).
@@ -29,6 +30,8 @@ To learn more about Swift and Realm, see the official documentation for [Realm S
   * To add Realm as a dependency, we prefer using Carthage. 
 
   * If you prefer, you can add it by using a dynamic framework or using Cocoapods.
+
+  * Need help with Carthage? See our repo [demo_swift_carthage](https://github.com/joelparkerhenderson/demo_swift_carthage).
 
 ## Create model classes
 
