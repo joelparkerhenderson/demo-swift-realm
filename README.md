@@ -13,19 +13,27 @@ This demonstration shows:
 
 This README describes how to create the project, if you want to try doing it yourself.
 
+This git repository has multiple git branches, so be sure to get the branch you want:
+
+  * `swift-4`: Swift version 4, Xcode version 9, iOS version 11. These are beta.
+
+  * `swift-3`: Swift version 3, Xcode version 8, iOS version 10.
+
+  * `swift-2`: Swift version 2, Xcode version 7, iOS version 9.
+
 To learn more about Swift and Realm, see the official documentation for [Realm Swift](https://realm.io/docs/swift/latest/)
 
 ## How to create the project
 
-1. Launch Xcode and create a new project. We call ours "Demo Swift Realm". 
+Launch Xcode and create a new project. We call ours "Demo Swift Realm". 
 
   * Need help? See our repo [demo_swift_hello_world](https://github.com/joelparkerhenderson/demo_swift_hello_world).
 
-1. Create a simple way to print some text to the screen, such as a text view with an IBOutlet named "demoTextView". 
+Create a simple way to print some text to the screen, such as a text view with an IBOutlet named "demoTextView". 
 
   * Need help? See our repo [demo_swift_text_view](https://github.com/joelparkerhenderson/demo_swift_text_view).
    
-1. Add Realm to the project. 
+Add Realm to the project. 
 
   * To add Realm as a dependency, we prefer using Carthage. 
 
@@ -35,9 +43,9 @@ To learn more about Swift and Realm, see the official documentation for [Realm S
 
 ## Create model classes
 
-1. Create a directory named "Models".
+Create a directory named "Models".
 
-1. Create a Realm model for a "Team", such as a company.
+Create a Realm model for a "Team", such as a company.
 
         import Foundation
         import RealmSwift
@@ -45,7 +53,7 @@ To learn more about Swift and Realm, see the official documentation for [Realm S
           dynamic var name: String? = nil  
         }
 
-1. Create a Realm model for a "Task", such as a to-do item.
+Create a Realm model for a "Task", such as a to-do item.
 
         import Foundation
         import RealmSwift
@@ -55,9 +63,9 @@ To learn more about Swift and Realm, see the official documentation for [Realm S
 
 ## Create model objects
 
-1. Edit `ViewController.swift`. 
+Edit `ViewController.swift`. 
 
-1. Add simple code to create model objects, then print some output to the screen.
+Add simple code to create model objects, then print some output to the screen.
 
 		import UIKit
 		class ViewController: UIViewController {
@@ -73,7 +81,7 @@ To learn more about Swift and Realm, see the official documentation for [Realm S
 		  …
 		}  
  
-1. Run the app. The screen shows the team name and task name.
+Run the app. The screen shows the team name and task name.
 
 ## More examples 
 
@@ -93,7 +101,7 @@ To make Realm models easy to upgrade, we use a Realm migration.
 
 We prefer to implement the Realm migration as its own class.
 
-1. Create `RealmMigration.swift`.
+Create `RealmMigration.swift`.
 
 		import Foundation
 		import RealmSwift	
@@ -121,7 +129,7 @@ We prefer to implement the Realm migration as its own class.
 	      }
    	    }
 
-1. Edit `AddDelegate.swift` and add the Apple function `applicationDidFinishLaunching`.
+Edit `AddDelegate.swift` and add the Apple function `applicationDidFinishLaunching`.
 
         class AppDelegate: UIResponder, UIApplicationDelegate {
           …
