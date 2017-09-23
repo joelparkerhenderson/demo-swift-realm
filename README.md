@@ -41,8 +41,10 @@ Add Realm to the project. We suggest using Carthage or Cocoapods.
 
   * Carthage `Cartfile`:
 
+    ```
     github "realm/realm-cocoa"`
-
+    ```
+    
   * When you link the frameworks, and when you add the run phase, you want to use both `Realm.framework` and `RealmSwift.framework`.
   
   * [Help](doc/setup/add_carthage_frameworks.md)
