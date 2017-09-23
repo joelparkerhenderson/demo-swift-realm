@@ -1,3 +1,22 @@
+//
+//  RealmMigration.swift
+//  Demo Swift Realm
+//
+//  To make Realm models easy to upgrade, we use a Realm migration. 
+//
+//  We prefer to implement the Realm migration as its own class.
+//
+//  The typical way to use this class is to call it when the app launches.
+//
+//  Example:
+//
+//      class AppDelegate: UIResponder, UIApplicationDelegate {
+//        …
+//        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: //        UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+//          …
+//          RealmMigration.run()
+//          …
+
 import Foundation
 import RealmSwift
 
@@ -25,3 +44,6 @@ class RealmMigration {
   }
 
 }
+
+
+

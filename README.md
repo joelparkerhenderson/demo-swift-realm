@@ -6,60 +6,76 @@ This demonstration shows:
 
  * The [Swift](http://swift.org) programming language with
    [Apple](http://apple.com)
-   [iOS](http://www.apple.com/ios/)
    [Xcode](https://developer.apple.com/xcode/)
+   [iOS](http://www.apple.com/ios/)
 
  * The [Realm](http://realm.io) database, and a couple of models.
 
-This README describes how to create the project, if you want to try doing it yourself.
 
-This git repository has multiple git branches, so be sure to get the branch you want:
+## Start
 
-  * `swift-4`: Swift version 4, Xcode version 9, iOS version 11. These are beta.
+To use this demo, you can clone this repo, or you can use this README to create your own project.
 
-  * `swift-3`: Swift version 3, Xcode version 8, iOS version 10.
+If you clone this repo, then be aware that there are multiple git branches, so pick the one you want.
 
-  * `swift-2`: Swift version 2, Xcode version 7, iOS version 9.
+  * swift-4-xcode-9: Swift version 4, Xcode version 9, iOS version 11.
 
-To learn more about Swift and Realm, see the official documentation for [Realm Swift](https://realm.io/docs/swift/latest/)
+  * swift-3-xcode-8: Swift version 3, Xcode version 8, iOS version 10.
 
-## How to create the project
 
-Launch Xcode and create a new project. We call ours "Demo Swift Realm". 
+## Create the project
 
-  * Need help? See our repo [demo_swift_hello_world](https://github.com/joelparkerhenderson/demo_swift_hello_world).
+Launch Xcode and create a new project.
 
-Create a simple way to print some text to the screen, such as a text view with an IBOutlet named "demoTextView". 
+  * Use iOS template "Single View Application" and Product Name "Demo Swift Realm".
 
-  * Need help? See our repo [demo_swift_text_view](https://github.com/joelparkerhenderson/demo_swift_text_view).
-   
-Add Realm to the project. 
+  * [Help](doc/setup/create_a_new_xcode_project.md)
 
-  * To add Realm as a dependency, we prefer using Carthage. 
+Create a simple way to print some text to the screen.
 
-  * If you prefer, you can add it by using a dynamic framework or using Cocoapods.
+  * We create a text view object and IBOutlet named "demoTextView".
 
-  * Need help with Carthage? See our repo [demo_swift_carthage](https://github.com/joelparkerhenderson/demo_swift_carthage).
+  * [Help](doc/setup/create_a_text_view.md)
+
+Add Realm to the project. We suggest using Carthage or Cocoapods.
+
+  * Carthage `Cartfile`:
+
+    github "realm/realm-cocoa"`
+
+  * When you link the frameworks, and when you add the run phase, you want to use both `Realm.framework` and `RealmSwift.framework`.
+  
+  * [Help](doc/setup/add_carthage_frameworks.md)
+
 
 ## Create model classes
 
-Create a directory named "Models".
+In the left Xcode area that is the project tree, create a new group and name it "Models".
+
+In the new group "Models", create a new iOS Swift file and name it "Team.swift".
+
+  * If Xcode prompts you for where to save it, then create a new file folder "Models", and add it to all the targets.
 
 Create a Realm model for a "Team", such as a company.
 
-        import Foundation
-        import RealmSwift
-        class Team: Object {
-          dynamic var name: String? = nil  
-        }
+```swift
+import Foundation
+import RealmSwift
+class Team: Object {
+  dynamic var name: String? = nil  
+}
+```
 
 Create a Realm model for a "Task", such as a to-do item.
 
-        import Foundation
-        import RealmSwift
-        class Task: Object {
-          dynamic var name: String? = nil  
-        }
+```swift
+import Foundation
+import RealmSwift
+class Task: Object {
+  dynamic var name: String? = nil  
+}
+```
+
 
 ## Create model objects
 
@@ -67,26 +83,41 @@ Edit `ViewController.swift`.
 
 Add simple code to create model objects, then print some output to the screen.
 
-		import UIKit
-		class ViewController: UIViewController {
-		  @IBOutlet weak var demoTextView: UITextView!
-		  override func viewDidLoad() {
-		    super.viewDidLoad()
-		    let team = Team()
-		    team.name = "Arsenal Football Club"
-		    let task = Task()
-		    task.name = "Add sprint exercises"
-		    demoTextView.text = team.name! + "\n" + task.name!
-		  }
-		  …
-		}  
+```swift
+import UIKit
+
+class ViewController: UIViewController {
+
+  @IBOutlet weak var demoTextView: UITextView!
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    let team = Team()
+    team.name = "Arsenal Football Club"
+
+    let task = Task()
+    task.name = "Add sprint exercises"
+
+    demoTextView.text = team.name! + "\n" + task.name!
+  }
+  …
+```
  
-Run the app. The screen shows the team name and task name.
+## Run
+
+Run the app. 
+
+The Simulator screen shows the team name and task name.
+
+Congratulations, you're successful!
+
 
 ## More examples 
 
 The source code for this project contains many more examples such as:
 
+  * Migration: how to upgrade the database when the app launches.
   * Primary keys: how to set a primary key, and why it matters.
   * Optional properties: especially by using `RealmOptional`.
   * Ignored properties: tell Realm to skip persisting these.
@@ -94,57 +125,18 @@ The source code for this project contains many more examples such as:
   * Inverse relationships: enable efficient round-trip lookups.
   * Indexed properties: set properties to be indexed.
    
-   
-## Create Realm migration
+The source code examples are here:
 
-To make Realm models easy to upgrade, we use a Realm migration. 
+  * [src/RealmMigration.swift](src/RealmMigration.swift)
+  * [src/Team.swift](src/Team.swift)
+  * [src/Task.swift](src/Task.swift)
 
-We prefer to implement the Realm migration as its own class.
 
-Create `RealmMigration.swift`.
-
-		import Foundation
-		import RealmSwift	
-		 
-        class RealmMigration {
-          class func run(){
-	        Realm.Configuration.defaultConfiguration = Realm.Configuration(
-	          // Set the new schema version. This must be greater than the previously used
-	          // version (if you've never set a schema version before, the version is 0).
-	          schemaVersion: 0,
-	          // Set the block which will be called automatically when opening a Realm with
-  	          // a schema version lower than the one set above
- 	          migrationBlock: { migration, oldSchemaVersion in
-	            // We haven’t migrated anything yet, so oldSchemaVersion == 0
-	            if (oldSchemaVersion < 1) {
-	              // Realm will automatically detect new properties,
-	              // and automatically detect removed properties,
-	              // and will update the schema on disk automatically.
-	            }
-	          }
-	        )	    
-	        // Now that we've told Realm how to handle the schema change,
-	        // opening the file will automatically perform the migration.
-	        _ = try! Realm()
-	      }
-   	    }
-
-Edit `AddDelegate.swift` and add the Apple function `applicationDidFinishLaunching`.
-
-        class AppDelegate: UIResponder, UIApplicationDelegate {
-          …
-          func applicationDidFinishLaunching(application: UIApplication) {
-            RealmMigration.run()
-            …
-          }
-        …
-
-  
 ## Tracking
 
 * Package: demo_swift_realm
-* Version: 1.0.0
+* Version: 3.0.0
 * Created: 2016-04-09
-* Updated: 2016-08-11
+* Updated: 2017-09-22
 * License: BSD, MIT, GPL
-* Contact: Joel Parker Henderson (joel@joelparkerhenderson.com)
+* Contact: Joel Parker Henderson (http://joelparkerhenderson.com)
